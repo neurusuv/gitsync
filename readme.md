@@ -49,4 +49,24 @@
 
 [Git 自动化脚本实例](https://github.com/neurusuv/gitsync)
 
+注意在   [gitupd.bat](gitupd.bat) 和  [run_git_auto_push.vbs](run_git_auto_push.vbs) 中间
+
+  
+
+```
+ 
+cd C:\gitsync
+
+```
+
+```
+ 
+WshShell.Run "C:\gitsync\gitupd.bat", 0
+
+```
+
+也改为你的仓库地址， 我这里是 c:\gitsync，最好绝对地址。
+
+
+
 通过这种方式，您可以自动化 Git 操作，并确保在后台运行这些操作，不会干扰前台的工作。自动化和合并策略的正确实施，可以显著提高开发效率，并保持代码仓库的稳定和安全。

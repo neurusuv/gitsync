@@ -1,5 +1,5 @@
 @echo off
-cd C:\notes
+cd C:\gitsync
 
 
 
@@ -19,19 +19,19 @@ for /f "tokens=1-4 delims=:. " %%i in ("%date% %time%") do (
 set branchname=backup_%datetime%
 
 :: 拉取最新的更改
-git pull nas master
+git pull origin master
 
 :: 检查是否有合并冲突并使用 'ours' 策略无条件合并
 if %errorlevel% neq 0 (
     echo Pull failed due to conflicts. Creating backup branch and attempting to merge using 'ours' strategy.
 
     :: 从远程创建新的备份分支
-    git fetch nas
-    git branch %branchname% nas/master
-    git push nas %branchname%
+    git fetch origin
+    git branch %branchname% origin/master
+    git push origin %branchname%
     
     :: 进行合并，选择本地分支的更改
-    git merge -X ours nas/master
+    git merge -X ours origin/master
 
     if %errorlevel% neq 0 (
         echo Merge using 'ours' strategy failed. Please check manually.
@@ -41,12 +41,12 @@ if %errorlevel% neq 0 (
 )
 
 
-:: 推送到 nas 仓库的 master 分支
-git push nas master
+:: 推送到 origin 仓库的 master 分支
+git push origin master
 
-:: 合并 nas/master 到本地 master 使用 'ours' 策略
-git fetch nas
-git merge -X ours nas/master
+:: 合并 origin/master 到本地 master 使用 'ours' 策略
+git fetch origin
+git merge -X ours origin/master
 
 :: 检查合并结果
 if %errorlevel% neq 0 (
