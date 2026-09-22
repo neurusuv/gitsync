@@ -1,0 +1,9 @@
+{
+  "id": "simple-git-sync",
+  "name": "Simple Git Sync",
+  "version": "1.3.0",
+  "minAppVersion": "1.4.0",
+  "description": "auto commit（可选，默认关，独立开关）+ auto pull + auto push。分叉自动合并；真冲突时按时间顺序分两次提交解决，不产生额外文件、不留孤立分支，失败版本留痕在主线历史里。LFS 对象在服务端损坏时不再卡死同步：自动改用「先落指针、事后补内容」的方式完成合并，确实取不回来的文件按「坏了就删」原则删除并留下说明提交。分支尖端永远不出现两个连续的自动提交——推送前自动折叠成一个。\"幻影修改\"（内容与库里完全相同、只是 index 的 stat 缓存对不上，git diff 看不见但会挡住合并）在 pull 前自动刷掉，不产生提交；并顺手把 core.autocrlf 校准成 input，从源头不再产生这类文件。静置超过 5 分钟的 .lock（进程被强杀或多个 git 工具抢同一个仓库留下的僵尸锁，会让同步永久报 cannot lock ref 直到有人手工删除）每次操作前自动清掉。Obsidian 的每机状态文件（workspace.json、notebook-navigator/data.json）开机自动打 skip-worktree 冻结——该标记只存在于本机 .git/index、不随 push 分发，靠文档提醒人手工跑一次是不可靠的。全部逻辑在 main.js，可通读。",
+  "author": "Ban",
+  "isDesktopOnly": true
+}
